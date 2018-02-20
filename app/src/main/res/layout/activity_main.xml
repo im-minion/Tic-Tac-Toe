@@ -4,14 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:gravity="center_horizontal"
     tools:context="xyz.vaibhav.com.myapplication.MainActivity">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.2"
+        android:scaleType="centerCrop"
+        android:src="@drawable/xo" />
 
     <android.support.v7.widget.GridLayout
         android:id="@+id/gridLayout"
         android:layout_width="360dp"
         android:layout_height="360dp"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
+        android:layout_marginTop="16dp"
         android:background="@drawable/board"
         app:columnCount="3"
         app:rowCount="3"
@@ -121,30 +130,96 @@
     </android.support.v7.widget.GridLayout>
 
     <LinearLayout
+        android:id="@+id/lin_lay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/gridLayout"
+        android:layout_marginTop="24dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="12dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="@string/x_wins"
+            android:textAlignment="textEnd"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="28sp" />
+
+        <TextView
+            android:id="@+id/x_win_number"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingStart="4dp"
+            android:text="0"
+            android:textAlignment="textStart"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="28sp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="@string/y_wins"
+            android:textAlignment="textEnd"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="28sp" />
+
+        <TextView
+            android:id="@+id/y_win_number"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingStart="4dp"
+            android:text="0"
+            android:textAlignment="textStart"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="28sp" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/reset_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="22dp"
+        android:background="#000000"
+        android:onClick="playAgain"
+        android:text="@string/reset"
+        android:textColor="#ffffff" />
+
+    <LinearLayout
         android:id="@+id/playAgainLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:background="#ffffff"
+        android:background="@color/colorPrimaryDark"
         android:orientation="vertical"
-        android:padding="30dp"
         android:visibility="invisible">
 
         <TextView
             android:id="@+id/winnerMessage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="24dp"
             android:text="@string/message"
-            android:textColor="#000000"
-            android:textSize="30sp" />
+            android:textColor="#ffffff"
+            android:textSize="28sp" />
 
         <Button
             android:id="@+id/playAgainButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:background="#ffffff"
             android:onClick="playAgain"
             android:text="@string/play_again" />
     </LinearLayout>
+
 
 </RelativeLayout>

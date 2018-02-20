@@ -8,12 +8,15 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
     //0 means o and 1 means x
     int activePlayer = 0;
+    int x_wins = 0;
+    int y_wins = 0;
+    TextView xText, yText;
 
     boolean gameActive = true;
 
@@ -22,10 +25,17 @@ public class MainActivity extends AppCompatActivity {
 
     int[][] winningPositions = {{0, 1, 2}, {3, 4, 5}, {6, 7, 8}, {0, 3, 6}, {1, 4, 7}, {2, 5, 8}, {0, 4, 8}, {2, 4, 6}};
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        xText = (TextView) findViewById(R.id.x_win_number);
+        yText = (TextView) findViewById(R.id.y_win_number);
+    }
+
     public void dropIn(View view) {
 
         ImageView counter = (ImageView) view;
-
         int tappedCounter = Integer.parseInt(counter.getTag().toString());
         if (gameState[tappedCounter] == 2 && gameActive) {
             gameState[tappedCounter] = activePlayer;
@@ -48,11 +58,23 @@ public class MainActivity extends AppCompatActivity {
                         gameState[winningPosition[0]] != 2) {
                     gameActive = false;
                     String winner = "x";
+                    /*x_wins++;
+                    xText.setText("" + x_wins);*/
                     if (gameState[winningPosition[0]] == 0) {
                         winner = "o";
+                        /*y_wins++;
+                        yText.setText("" + y_wins);*/
                     }
                     TextView winnerMessage = (TextView) findViewById(R.id.winnerMessage);
+                    if (Objects.equals(winner, "x")) {
+                        x_wins++;
+                        xText.setText("" + x_wins);
+                    } else if (Objects.equals(winner, "o")) {
+                        y_wins++;
+                        yText.setText("" + y_wins);
+                    }
                     winnerMessage.setText("Player " + winner + " " + getResources().getString(R.string.won));
+
                     LinearLayout layout = (LinearLayout) findViewById(R.id.playAgainLayout);
                     layout.setVisibility(View.VISIBLE);
                 } else {
@@ -93,9 +115,5 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-    }
+
 }
